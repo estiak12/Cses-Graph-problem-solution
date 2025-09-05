@@ -1,0 +1,83 @@
+//Bismillahir Rahmanir Rahim
+//Auhor Name  :Estiak Khan
+//Time of AC  :12:07AM;
+//Date        :5-9-2025
+
+#include <bits/stdc++.h>
+#include<string>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+#define ll long long int
+#define vii vector<pair<ll,ll>>
+#define pii pair<ll,ll>
+#define f first
+#define s second
+const ll inf = 1e18;
+const ll  MOD = 1000000007;
+using namespace std;
+template<typename T> using ordered_set = tree<T, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>;
+
+const int N = 2e5 + 123;
+const int Max_value=1e6+123,mx=1e7;
+vector<ll>adj[N];
+vector<pair<ll,ll>>ad[N];
+ll color[N];
+ll h[N];
+const int nn=1005;
+ll vis[nn][nn];
+char c[nn][nn];
+char parent[nn][nn];
+ll cost[N];
+ll dis[nn][nn];
+vector<pii> segs;
+ll cc,f,n,k;
+ll par[N];
+ll level_leaf[1002][1002];
+ll leaf;
+ll cnt[Max_value];
+ll yes=0;
+pair<ll,ll>jora;
+ll dx[4]={-1, 1, 0, 0};
+ll dy[4]={0, 0, 1, -1};
+ll ch[4]={'U', 'D', 'R', 'L'};
+
+void dijkstra(int n){
+ using p=pair<ll,ll>;
+ priority_queue<p,vector<p>,greater<p>>q;
+ q.push({0,n});
+
+ while(!q.empty()){
+    auto [d,u]=q.top();
+    q.pop();
+    if(cost[u]!=d)continue;
+    for(auto [v,w]:ad[u]){
+        if(cost[v]>d+w){
+            cost[v]=d+w;
+            q.push({cost[v],v});
+        }
+    }
+ }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll n,m;
+    cin>>n>>m;
+    for(int i=1; i<=n; i++){
+        cost[i]=inf;
+    }
+    for(int i=1; i<=m; i++){
+        int u,v,w;
+        cin>>u>>v>>w;
+        ad[u].push_back({v,w});
+    }
+    cost[1]=0;
+    dijkstra(1);
+    for(int i=1; i<=n; i++){
+        cout<<cost[i]<<" ";
+    }
+    cout<<endl;
+}
